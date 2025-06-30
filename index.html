@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Única - Mi Proyecto</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <!-- Contenedor para el cambio de color -->
+    <div class="color-switcher">
+        <div class="switcher-btn"><i class="fas fa-cog"></i></div>
+        <h3>Cambiar Color</h3>
+        <div class="theme-colors">
+            <span class="color" data-color="#8e44ad"></span>
+            <span class="color" data-color="#3498db"></span>
+            <span class="color" data-color="#e74c3c"></span>
+            <span class="color" data-color="#27ae60"></span>
+            <span class="color" data-color="#f39c12"></span>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="#" class="logo">TiendaÚnica <i class="fas fa-bolt"></i></a>
+            <div class="search-box">
+                <input type="search" id="search-input" placeholder="Buscar productos...">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="header-icons">
+                <div id="cart-btn" class="icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Carrusel de Banners -->
+    <section class="hero-carousel container">
+        <div class="carousel-container">
+            <div class="carousel-slide">
+                <div class="carousel-item item-1"><div class="carousel-content"><h2>Ofertas de Verano</h2><p>Hasta 50% de descuento en productos seleccionados.</p><a href="#" class="btn btn-primary"d>Ver Ofertas</a></div></div>
+                <div class="carousel-item item-2"><div class="carousel-content"><h2>Nueva Colección</h2><p>Descubre lo último en tecnología y moda.</p><a href="#" class="btn btn-primary">Explorar</a></div></div>
+                <div class="carousel-item item-3"><div class="carousel-content"><h2>Envío Gratis</h2><p>En todas las compras superiores a $50.</p><a href="#" class="btn btn-primary">Comprar Ahora</a></div></div>
+            </div>
+        </div>
+        <button class="carousel-btn prev"><i class="fas fa-chevron-left"></i></button>
+        <button class="carousel-btn next"><i class="fas fa-chevron-right"></i></button>
+        <div class="carousel-dots"></div>
+    </section>
+
+    <!-- Filtros de Categorías -->
+    <nav class="category-filters container">
+        <button class="filter-btn active" data-category="all">Todos</button>
+        <button class="filter-btn" data-category="electronica">Electrónica</button>
+        <button class="filter-btn" data-category="ropa">Ropa</button>
+        <button class="filter-btn" data-category="hogar">Hogar</button>
+    </nav>
+    
+    <!-- Grid de Productos -->
+    <main class="products-section container">
+        <div id="product-list" class="product-grid">
+            <!-- Los productos se insertarán aquí con JavaScript -->
+        </div>
+    </main>
+
+    <!-- Carrito, Modal de Pago, Toasts -->
+    <div class="cart-sidebar"><div class="cart-header"><h3>Tu Carrito <i class="fas fa-shopping-cart"></i></h3><div id="close-cart" class="icon"><i class="fas fa-times"></i></div></div><div id="cart-items" class="cart-body"></div><div class="cart-footer"><div class="total"><strong>Total:</strong><span id="cart-total">$0.00</span></div><button id="checkout-btn" class="btn btn-primary">Proceder al Pago</button></div></div>
+    <div class="cart-overlay"></div>
+    <div id="payment-modal" class="modal-overlay"><div class="modal-content"><span id="close-payment-modal" class="close-btn">×</span><h2>Formulario de Pago</h2><p>Esto es una simulación.</p><form id="payment-form"><div class="form-group"><label for="card-name">Nombre</label><input type="text" id="card-name" required placeholder="John Doe"></div><div class="form-group"><label for="card-number">Número de Tarjeta</label><div class="card-input"><i class="fab fa-cc-visa"></i><i class="fab fa-cc-mastercard"></i><input type="text" id="card-number" required placeholder="0000 0000 0000 0000" maxlength="19"></div></div><div class="form-row"><div class="form-group"><label for="card-expiry">Expiración</label><input type="text" id="card-expiry" required placeholder="MM/AA" maxlength="5"></div><div class="form-group"><label for="card-cvc">CVC</label><input type="text" id="card-cvc" required placeholder="123" maxlength="3"></div></div><button type="submit" class="btn btn-primary btn-block"><span class="btn-text">Pagar</span><span class="spinner" style="display: none;"></span></button></form></div></div>
+    <div id="toast-container"></div>
+    
+    <!-- Modal de Detalles del Producto -->
+    <div id="product-detail-modal" class="modal-overlay">
+        <div class="modal-content product-detail-content">
+            <span id="close-product-modal" class="close-btn">×</span>
+            <div class="product-detail-grid">
+                <div class="product-detail-image">
+                    <img id="modal-product-image" src="" alt="Imagen de producto">
+                </div>
+                <div class="product-detail-info">
+                    <h2 id="modal-product-title">Nombre del Producto</h2>
+                    <p class="modal-product-price" id="modal-product-price">$0.00</p>
+                    <p class="modal-product-description" id="modal-product-description">Descripción detallada del producto...</p>
+                    <button id="modal-add-to-cart-btn" class="btn btn-primary"><i class="fas fa-cart-plus"></i> Añadir al carrito</button>
+
+                    <div class="product-reviews-section">
+                        <h3>Reseñas del Producto</h3>
+                        <div id="modal-reviews-list" class="reviews-list">
+                            <!-- Reseñas específicas del producto aquí -->
+                        </div>
+                        <div class="review-form-container">
+                            <h4>Deja tu opinión</h4>
+                            <form id="modal-review-form">
+                                <input type="text" id="modal-reviewer-name" required placeholder="Tu nombre">
+                                <div class="star-rating" id="modal-star-rating">
+                                    <i class="far fa-star" data-value="1"></i><i class="far fa-star" data-value="2"></i><i class="far fa-star" data-value="3"></i><i class="far fa-star" data-value="4"></i><i class="far fa-star" data-value="5"></i>
+                                </div>
+                                <textarea id="modal-review-comment" rows="3" required placeholder="Tu experiencia..."></textarea>
+                                <button type="submit" class="btn btn-primary">Enviar Reseña</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Profesional -->
+    <footer class="site-footer"><div class="container footer-grid"><div class="footer-about"><a href="#" class="logo footer-logo">TiendaÚnica <i class="fas fa-bolt"></i></a><p>Tu tienda de confianza para encontrar productos únicos. Un proyecto para mi portafolio.</p></div><div class="footer-links"><h4>Navegación</h4><ul><li><a href="#">Inicio</a></li><li><a href="#">Productos</a></li><li><a href="#">Ofertas</a></li><li><a href="#">Contacto</a></li></ul></div><div class="footer-social"><h4>Síguenos</h4><div class="social-icons"><a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a><a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a><a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a><a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a></div></div></div><div class="footer-bottom"><p>© 2024 TiendaÚnica. Todos los derechos reservados.</p></div></footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
